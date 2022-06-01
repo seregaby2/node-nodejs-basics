@@ -9,9 +9,9 @@ const PathToCopy = path.join(__dirname, 'files_copy');
 
 export const copy = async () => {
     fs.readdir(PathFromCopy, { withFileTypes: true })
-    .then(fs.mkdir('files_copy'))
+    .then(() => fs.mkdir('files_copy'))
     .then(() => fs.readdir(PathFromCopy, { withFileTypes: true }))
     .then((data) => {data.forEach(e => fs.copyFile(`${PathFromCopy}/${e.name}`, `${PathToCopy}/${e.name}`))})
-    .catch((err) => {if(err)throw new error ('FS operation failed')})
+    .catch((err) => {if(err)throw new Error ('FS operation failed')})
 };
 copy()
